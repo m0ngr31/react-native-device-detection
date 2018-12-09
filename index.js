@@ -17,6 +17,7 @@ class DetectDeviceService {
     this.isPhoneOrTablet();
     this.isIosOrAndroid();
     this.detectIphoneX();
+    this.detectIphoneXR();
   }
   
   isPhoneOrTablet() {
@@ -52,6 +53,17 @@ class DetectDeviceService {
 	 	this.isIphoneX = false;
 	 }
 
+  }
+
+  detectIphoneXR() {
+    if( Platform.OS === 'ios' &&
+      !Platform.isTVOS &&
+      !Platform.isTVOS &&
+      (windowSize.height === 896 || windowSize.width === 896)) {
+        this.isIphoneXR = true;
+      } else {
+        this.isIphoneXR = false;
+      }
   }
 }
 
