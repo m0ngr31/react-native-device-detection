@@ -63,15 +63,13 @@ class DetectDeviceService {
   }
 
   detectIphoneX() {
-    if (
-      Platform.OS === 'ios' &&
+    if (Platform.OS === 'ios' &&
       !Platform.isPad &&
       !Platform.isTVOS &&
       (
         (windowSize.height === 812 || windowSize.width === 812) || // iPhone X and iPhone XS
         (windowSize.height === 896 || windowSize.width === 896) // iPhone XS Max and XR
-      )
-    ) {
+      )) {
       this.isIphoneX = true;
     } else {
       this.isIphoneX = false;
