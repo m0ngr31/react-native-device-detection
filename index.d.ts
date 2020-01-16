@@ -1,5 +1,5 @@
 declare module "react-native-device-detection" {
-    class DetectDeviceService {
+    interface DetectDeviceService {
         pixelDensity: number;
         width: number;
         height: number;
@@ -7,10 +7,14 @@ declare module "react-native-device-detection" {
         isAndroid: boolean;
         isPhone: boolean;
         isTablet: boolean;
-        isIphoneXstatic: boolean;
+        isIphoneX: boolean;
+
+        isPhoneOrTablet(): void;
+        isIosOrAndroid(): void;
+        detectIphoneX(): void;
     }
 
-    const Device = new DetectDeviceService();
+    const Device: DetectDeviceService;
 
     export default Device;
 }
