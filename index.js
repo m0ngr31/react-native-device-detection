@@ -4,10 +4,30 @@ import React, {
   Dimensions
 } from 'react-native';
 
-const windowSize = Dimensions.get('window');
+// https://learnjswith.me/javascript-throttle-function/
+const throttle = (fn, limit) => {
+  let waiting = false
+  return (...args) => {
+    if (!waiting) {
+      fn.apply(this, args)
+      waiting = true
+      setTimeout(() => {
+        waiting = false
+      }, limit)
+    }
+  }
+};
 
 class DetectDeviceService {
   constructor() {
+    this.checkSizes();
+
+    Dimensions.addEventListener('change', throttle(() => this.checkSizes(), 250));
+  }
+
+  checkSizes() {
+    const windowSize = Dimensions.get('window');
+
     this.pixelDensity = PixelRatio.get();
     this.width = windowSize.width;
     this.height = windowSize.height;
@@ -54,7 +74,6 @@ class DetectDeviceService {
     } else {
       this.isIphoneX = false;
     }
-
   }
 }
 
